@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { makeSelectUsers } from "./selectors";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const UsersContainers = styled.div`
   width: 100%;
@@ -44,6 +44,7 @@ export function UsersList(props) {
 
   return (
     <UsersContainers>
+      <h1>User Profile</h1>
       {users.map((user, i) => (
         <UserWrapper key={i}>
           <UserImage>
