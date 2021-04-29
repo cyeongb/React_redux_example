@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { createSelector } from "reselect";
 import { makeSelectUsers } from "./selectors";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const UsersContainers = styled.div`
   width: 100%;
@@ -38,15 +39,25 @@ export function UsersList(props) {
   const { users } = useSelector(stateSelector);
 
   const isEmptyUsers = !users || (users && users.length === 0);
+
+  // 페이지 앞으로가기, 뒤로가기 역할
+  const history = useHistory();
+
+  // 해당 유저 클릭시 id를 전달해서 유저 페이지로 이동하는 function
+  const clickUser = (id) => {
+    history.push(`/user/${id}`);
+  };
+
   if (isEmptyUsers) {
     return "No users";
   }
-
   return (
+    //user id를 통해서 id를 보내면 해당 id의 user를 한명씩 볼 수 있음
     <UsersContainers>
-      <h1>User Profile</h1>
+      <h2>User Profile</h2>
+      <hr />
       {users.map((user, i) => (
-        <UserWrapper key={i}>
+        <UserWrapper key={i} onClick={() => clickUser(user.id)}>
           <UserImage>
             <img src={user.avatar} alt="user_avatar" />
           </UserImage>

@@ -7,7 +7,7 @@ import { makeSelectUsers } from "./selectors";
 import { UsersList } from "./usersList";
 
 const stateSelector = createSelector(makeSelectUsers, (users) => ({
-  myusers: users,
+  stateUsers: users,
 }));
 
 const actionDispatch = (dispatch) => ({
@@ -16,10 +16,10 @@ const actionDispatch = (dispatch) => ({
 });
 
 export function HomePage(props) {
-  const { myusers } = useSelector(stateSelector);
+  const { stateUsers } = useSelector(stateSelector);
   const { setUser } = actionDispatch(useDispatch()); //dispatch 함수를 가져오기위한 useDispatch , dispatch function을 return 함
 
-  console.log("index.jsx HomePage() users :", myusers);
+  console.log("index.jsx HomePage() users :", stateUsers);
 
   const fetchUsers = async () => {
     const res = await axios
